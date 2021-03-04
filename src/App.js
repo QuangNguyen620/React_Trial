@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { browserHistory } from 'react-router'
+import DataSet from "./pages/DataSet";
+import CustomerInfo from "./components/Content/CustomerInfo";
+import { Layout, Menu } from "antd";
+const { Header, Content, Sider } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Layout>
+        <Sidebar />
+        <Layout>
+          <Content>
+            <BrowserRouter>
+              <Switch>
+                <Route path="/" exact>
+                  <DataSet />
+                </Route>
+                <Route
+                  history={browserHistory}
+                  path="/detail"
+                  exact
+                  component={CustomerInfo}
+                />
+              </Switch>
+            </BrowserRouter>
+          </Content>
+        </Layout>
+      </Layout>
+    </>
   );
 }
 
